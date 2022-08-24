@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
@@ -77,5 +79,13 @@ public class DroneServiceImpl implements DroneService {
             return opt.get();
         }
         throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
+    }
+
+    @Override
+    public List<Drone> getDronesList(){
+
+        List<Drone> droneList = new ArrayList<>();
+        droneRepository.findAll().iterator().forEachRemaining(droneList::add);
+        return droneList;
     }
 }

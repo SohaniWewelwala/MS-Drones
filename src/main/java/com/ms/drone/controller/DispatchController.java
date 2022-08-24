@@ -3,6 +3,7 @@ package com.ms.drone.controller;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.exception.DroneManagementException;
+import com.ms.drone.model.Drone;
 import com.ms.drone.service.DroneService;
 import com.ms.drone.util.Utils;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -31,6 +34,12 @@ public class DispatchController {
         } catch (DroneManagementClientException e) {
             return Utils.handleClientErrorResponse(e);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Drone>> getDronesList(){
+
+        return ResponseEntity.ok(droneService.getDronesList());
     }
 
     @GetMapping(path = "/{serialNumber}")
