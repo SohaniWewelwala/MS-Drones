@@ -12,9 +12,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_SERIAL_NUMBER;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_WEIGHT_LIMIT;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_DRONE_MODEL;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_NEGATIVE_WEIGHT_LIMIT;
 import static com.ms.drone.util.Constants.MAXIMUM_WEIGHT_LIMIT;
@@ -64,5 +67,15 @@ public class DroneServiceImpl implements DroneService {
         droneRepository.save(newDrone);
 
         return droneRepository.save(newDrone);
+    }
+
+    @Override
+    public Drone getDrone(String droneSerialNumber) throws DroneManagementClientException {
+
+        Optional<Drone> opt = droneRepository.findBySerialNumber(droneSerialNumber);
+        if(opt.isPresent()){
+            return opt.get();
+        }
+        throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
     }
 }

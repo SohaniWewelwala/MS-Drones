@@ -45,7 +45,8 @@ public class Constants {
         ERROR_INVALID_SERIAL_NUMBER("DM-002","Invalid serial number.", "Serial number must be less than 100 characters."),
         ERROR_INVALID_WEIGHT_LIMIT("DM-003", "Invalid weight limit.", "Drone weight limit should not exceed 500g"),
         ERROR_INVALID_DRONE_MODEL("DM-004", "Invalid drone model.", "Drone model is invalid."),
-        ERROR_NEGATIVE_WEIGHT_LIMIT("DM-005", "Invalid weight limit","Weight limit cannot be negative.");
+        ERROR_NEGATIVE_WEIGHT_LIMIT("DM-005", "Invalid weight limit","Weight limit cannot be negative."),
+        ERROR_SERIAL_NUMBER_NOT_EXISTS("DM-006", "Invalid Serial Number", "The serial number does not exist.");
 
         private final String code;
         private final String message;
@@ -76,6 +77,6 @@ public class Constants {
      * Error codes for Not Found Error Messages.
      */
     public enum NotFoundErrorMessages{
-
+        DM_006
     }
 }

@@ -7,4 +7,5 @@ import com.ms.drone.model.Drone;
 public interface DroneService {
 
     Drone registerDrone(DroneRegistrationDto drone) throws DroneManagementClientException;
+    Drone getDrone(String droneSerialNumber) throws DroneManagementClientException;
 }
