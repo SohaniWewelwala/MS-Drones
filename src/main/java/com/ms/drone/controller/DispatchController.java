@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.dto.MedicationDto;
 import com.ms.drone.exception.DroneManagementClientException;
-import com.ms.drone.exception.DroneManagementException;
 import com.ms.drone.model.Drone;
 import com.ms.drone.service.DroneService;
 import com.ms.drone.service.MedicationService;

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static com.ms.drone.util.Constants.DroneState.IDLE;
 import static com.ms.drone.util.Constants.DroneState.LOADED;
 import static com.ms.drone.util.Constants.DroneState.LOADING;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_BATTERY_LEVEL_LOW;
@@ -27,7 +28,6 @@ import static com.ms.drone.util.Constants.ErrorMessages.ERROR_MEDICATION_WEIGHT_
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
 import static com.ms.drone.util.Constants.MINIMUM_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.REGEX;
-import static com.ms.drone.util.Constants.DroneState.IDLE;
 
 @AllArgsConstructor
 @Service

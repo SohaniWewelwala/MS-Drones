@@ -4,8 +4,6 @@ import com.ms.drone.dto.MedicationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.model.Medication;
 
-import java.util.List;
-
 public interface MedicationService {
 
     /**

@@ -7,7 +7,6 @@ import com.ms.drone.model.Drone;
 import com.ms.drone.model.Medication;
 import com.ms.drone.repository.DroneRepository;
 import com.ms.drone.service.DroneService;
-import com.ms.drone.util.Constants;
 import com.ms.drone.util.Utils;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -18,22 +17,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_SERIAL_NUMBER;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_WEIGHT_LIMIT;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_ALREADY_EXISTS;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_DRONE_MODEL;
-import static com.ms.drone.util.Constants.ErrorMessages.ERROR_NEGATIVE_WEIGHT_LIMIT;
-import static com.ms.drone.util.Constants.MAXIMUM_WEIGHT_LIMIT;
-import static com.ms.drone.util.Constants.DroneState.IDLE;
 import static com.ms.drone.util.Constants.DroneModel;
-import static com.ms.drone.util.Constants.DroneModel.LIGHTWEIGHT;
-import static com.ms.drone.util.Constants.DroneModel.MIDDLEWEIGHT;
 import static com.ms.drone.util.Constants.DroneModel.CRUISERWEIGHT;
 import static com.ms.drone.util.Constants.DroneModel.HEAVYWEIGHT;
+import static com.ms.drone.util.Constants.DroneModel.LIGHTWEIGHT;
+import static com.ms.drone.util.Constants.DroneModel.MIDDLEWEIGHT;
+import static com.ms.drone.util.Constants.DroneState.IDLE;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_DRONE_MODEL;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_SERIAL_NUMBER;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_WEIGHT_LIMIT;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_NEGATIVE_WEIGHT_LIMIT;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_ALREADY_EXISTS;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
+import static com.ms.drone.util.Constants.MAXIMUM_WEIGHT_LIMIT;
 
 @AllArgsConstructor
 @Service
