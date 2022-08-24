@@ -23,6 +23,7 @@ import static com.ms.drone.util.Constants.ErrorMessages.ERROR_DRONE_NOT_AVAILABL
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_DRONE_WEIGHT_LIMIT_EXCEEDED;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_MEDICATION_CODE;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_MEDICATION_NAME;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_MEDICATION_WEIGHT_NOT_NEGATIVE;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
 import static com.ms.drone.util.Constants.MINIMUM_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.REGEX;
@@ -44,6 +45,9 @@ public class MedicationServiceImpl implements MedicationService {
         }
         if (!medication.getCode().matches(REGEX)) {
             throw Utils.handleException(ERROR_INVALID_MEDICATION_CODE);
+        }
+        if(medication.getWeight() < 0){
+            throw Utils.handleException(ERROR_MEDICATION_WEIGHT_NOT_NEGATIVE);
         }
         Optional<Drone> opt = droneRepository.findBySerialNumber(medication.getDroneSerialNumber());
         Drone drone = null;

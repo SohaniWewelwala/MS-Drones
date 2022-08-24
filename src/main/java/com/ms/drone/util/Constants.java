@@ -54,7 +54,8 @@ public class Constants {
         ERROR_DRONE_NOT_AVAILABLE_FOR_LOADING("DM-010","Invalid drone state.", "Drone not available for LOADING."),
         ERROR_DRONE_WEIGHT_LIMIT_EXCEEDED("DM-011", "Cannot have more weight.", "Drone maximum weight has been exceeded."),
         ERROR_INVALID_IMAGE_FILE("DM-012", "Invalid image file.", "Should have a valid image file."),
-        ERROR_BATTERY_LEVEL_LOW("DM-013", "Battery level is low.", "Battery level must be greater than 25 to LOAD medications.");
+        ERROR_BATTERY_LEVEL_LOW("DM-013", "Battery level is low.", "Battery level must be greater than 25 to LOAD medications."),
+        ERROR_MEDICATION_WEIGHT_NOT_NEGATIVE("DM-014", "Medication weight should be positive.", "Medication weight should be a positive value.");
 
         private final String code;
         private final String message;
