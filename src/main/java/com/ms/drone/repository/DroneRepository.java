@@ -14,6 +14,6 @@ public interface DroneRepository extends CrudRepository<Drone, Long> {
 
     Optional<Drone> findBySerialNumber(String serialNumber);
 
-    @Query(value = "SELECT * FROM drones WHERE drone_state = 'IDLE'", nativeQuery = true)
+    @Query(value = "SELECT * FROM drones WHERE drone_state = 'IDLE' OR drone_state = 'LOADING'", nativeQuery = true)
     Optional<List<Drone>> getAvailableDronesForLoading();
 }

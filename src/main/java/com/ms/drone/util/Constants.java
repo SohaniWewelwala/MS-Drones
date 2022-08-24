@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class Constants {
 
     public static final int MAXIMUM_WEIGHT_LIMIT = 500;
+    public static final String REGEX = "^[A-Za-z0-9_-]*$";
 
     /**
      * Enum for Drone models.
@@ -47,9 +48,14 @@ public class Constants {
                 "Serial number must be less than 100 characters."),
         ERROR_INVALID_WEIGHT_LIMIT("DM-003", "Invalid weight limit.", "Drone weight limit should not exceed 500g"),
         ERROR_INVALID_DRONE_MODEL("DM-004", "Invalid drone model.", "Drone model is invalid."),
-        ERROR_NEGATIVE_WEIGHT_LIMIT("DM-005", "Invalid weight limit", "Weight limit cannot be negative."),
-        ERROR_SERIAL_NUMBER_NOT_EXISTS("DM-006", "Invalid serial number", "The serial number does not exist."),
-        ERROR_SERIAL_NUMBER_ALREADY_EXISTS("DM-007", "Invalid serial number", "Serial Number already exists.");
+        ERROR_NEGATIVE_WEIGHT_LIMIT("DM-005", "Invalid weight limit.", "Weight limit cannot be negative."),
+        ERROR_SERIAL_NUMBER_NOT_EXISTS("DM-006", "Invalid serial number.", "The serial number does not exist."),
+        ERROR_SERIAL_NUMBER_ALREADY_EXISTS("DM-007", "Invalid serial number.", "Serial Number already exists."),
+        ERROR_INVALID_MEDICATION_NAME("DM-008", "Invalid medication name.", "Medication name can only have alphabets, numbers, - and _."),
+        ERROR_INVALID_MEDICATION_CODE("DM-009", "Invalid medication code.", "Medication code can only have alphabets, numbers, - and _."),
+        ERROR_DRONE_NOT_AVAILABLE_FOR_LOADING("DM-010","Invalid drone state.", "Drone not available for LOADING."),
+        ERROR_DRONE_WEIGHT_LIMIT_EXCEEDED("DM-011", "Cannot have more weight.", "Drone maximum weight has been exceeded."),
+        ERROR_INVALID_IMAGE_FILE("DM-012", "Invalid image file.", "Should have a valid image file.");
 
         private final String code;
         private final String message;

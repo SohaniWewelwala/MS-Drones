@@ -1,4 +1,4 @@
-INSERT INTO drones (drone_serial_number, drone_model, drone_weight_limit, drone_battery_capacity, drone_state) VALUES ( 'DRONE001', 'LIGHTWEIGHT', 50, 50, 'IDLE');
+INSERT INTO drones (drone_serial_number, drone_model, drone_weight_limit, drone_battery_capacity, drone_state) VALUES ( 'DRONE001', 'LIGHTWEIGHT', 500, 50, 'IDLE');
 INSERT INTO drones (drone_serial_number, drone_model, drone_weight_limit, drone_battery_capacity, drone_state) VALUES ( 'DRONE002', 'MIDDLEWEIGHT', 50, 100, 'LOADING');
 INSERT INTO drones (drone_serial_number, drone_model, drone_weight_limit, drone_battery_capacity, drone_state) VALUES ( 'DRONE003', 'CRUISERWEIGHT', 50, 150, 'DELIVERING');
 INSERT INTO drones (drone_serial_number, drone_model, drone_weight_limit, drone_battery_capacity, drone_state) VALUES ( 'DRONE004', 'HEAVYWEIGHT', 50, 200, 'IDLE');
