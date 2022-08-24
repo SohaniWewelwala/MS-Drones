@@ -37,7 +37,7 @@ public class DispatchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Drone>> getDronesList(){
+    public ResponseEntity<List<Drone>> getDronesList() {
 
         return ResponseEntity.ok(droneService.getDronesList());
     }
@@ -47,6 +47,16 @@ public class DispatchController {
 
         try {
             return ResponseEntity.ok(droneService.getDrone(serialNumber));
+        } catch (DroneManagementClientException e) {
+            return Utils.handleClientErrorResponse(e);
+        }
+    }
+
+    @GetMapping(path = "/available-drones-for-loading")
+    public ResponseEntity<Object> getDronesAvailableForLoading() {
+
+        try {
+            return ResponseEntity.ok(droneService.getAvailableDronesForLoading());
         } catch (DroneManagementClientException e) {
             return Utils.handleClientErrorResponse(e);
         }

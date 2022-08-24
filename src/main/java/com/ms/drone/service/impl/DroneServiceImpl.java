@@ -13,12 +13,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_SERIAL_NUMBER;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_WEIGHT_LIMIT;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_ALREADY_EXISTS;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_DRONE_MODEL;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_NEGATIVE_WEIGHT_LIMIT;
@@ -58,6 +60,11 @@ public class DroneServiceImpl implements DroneService {
                 !StringUtils.equalsIgnoreCase(droneModel, CRUISERWEIGHT.name())) {
             throw Utils.handleException(ERROR_INVALID_DRONE_MODEL);
         }
+        //check whether the serial number is available
+        Optional<Drone> opt = droneRepository.findBySerialNumber(drone.getSerialNumber());
+        if(opt.isPresent()){
+            throw Utils.handleException(ERROR_SERIAL_NUMBER_ALREADY_EXISTS);
+        }
 
         Drone newDrone = new Drone();
         //copy bean properties.
@@ -84,8 +91,18 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public List<Drone> getDronesList(){
 
-        List<Drone> droneList = new ArrayList<>();
-        droneRepository.findAll().iterator().forEachRemaining(droneList::add);
-        return droneList;
+        List<Drone> dronesList = new ArrayList<>();
+        droneRepository.findAll().iterator().forEachRemaining(dronesList::add);
+        return dronesList;
+    }
+
+    @Override
+    public List<Drone> getAvailableDronesForLoading() throws DroneManagementClientException {
+
+        Optional<List<Drone>> availableDrones = droneRepository.getAvailableDronesForLoading();
+        if(availableDrones.isPresent()){
+            return availableDrones.get();
+        }
+        return Collections.emptyList();
     }
 }
