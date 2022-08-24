@@ -1,5 +1,6 @@
 package com.ms.drone.service;
 
+import com.ms.drone.dto.DroneBatteryCapacityDto;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.model.Drone;
@@ -40,4 +41,13 @@ public interface DroneService {
      * @throws DroneManagementClientException Throws an exception if an error occurs while getting all the available drones for LOADING.
      */
     List<Drone> getAvailableDronesForLoading() throws DroneManagementClientException;
+
+    /**
+     * Get Battery Capacity of a drone.
+     *
+     * @param serialNumber Serial number of a drone.
+     * @return DroneBatteryCapacityDTO.
+     * @throws DroneManagementClientException Throws an exception if an error occurs while getting battery capacity of a drone.
+     */
+    DroneBatteryCapacityDto getBatteryCapacityOfADrone(String serialNumber) throws DroneManagementClientException;
 }

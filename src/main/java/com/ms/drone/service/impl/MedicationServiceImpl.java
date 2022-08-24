@@ -18,11 +18,13 @@ import java.util.Optional;
 
 import static com.ms.drone.util.Constants.DroneState.LOADED;
 import static com.ms.drone.util.Constants.DroneState.LOADING;
+import static com.ms.drone.util.Constants.ErrorMessages.ERROR_BATTERY_LEVEL_LOW;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_DRONE_NOT_AVAILABLE_FOR_LOADING;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_DRONE_WEIGHT_LIMIT_EXCEEDED;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_MEDICATION_CODE;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_MEDICATION_NAME;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_SERIAL_NUMBER_NOT_EXISTS;
+import static com.ms.drone.util.Constants.MINIMUM_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.REGEX;
 import static com.ms.drone.util.Constants.DroneState.IDLE;
 
@@ -51,12 +53,12 @@ public class MedicationServiceImpl implements MedicationService {
         if (drone == null) {
             throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
         }
-        System.out.println(drone.getDroneState().name());
-        System.out.println(IDLE.name());
-        System.out.println(StringUtils.equalsIgnoreCase(IDLE.name(),drone.getDroneState().name()));
         if (!StringUtils.equalsIgnoreCase(drone.getDroneState().name(), IDLE.name()) &&
                 !StringUtils.equalsIgnoreCase(drone.getDroneState().name(), LOADING.name())) {
             throw Utils.handleException(ERROR_DRONE_NOT_AVAILABLE_FOR_LOADING);
+        }
+        if(drone.getBatteryCapacity() < MINIMUM_BATTERY_CAPACITY){
+            throw Utils.handleException(ERROR_BATTERY_LEVEL_LOW);
         }
         /**
          * we will subtract the weight limit of drone until it gets to 0. If the drone weight limit goes negative, it cannot

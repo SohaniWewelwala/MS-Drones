@@ -1,5 +1,6 @@
 package com.ms.drone.service.impl;
 
+import com.ms.drone.dto.DroneBatteryCapacityDto;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.model.Drone;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_BATTERY_CAPACITY;
 import static com.ms.drone.util.Constants.ErrorMessages.ERROR_INVALID_SERIAL_NUMBER;
@@ -44,10 +46,10 @@ public class DroneServiceImpl implements DroneService {
         if (drone.getBatteryCapacity() > 100 || drone.getBatteryCapacity() <= 0) {
             throw Utils.handleException(ERROR_INVALID_BATTERY_CAPACITY);
         }
-        if(drone.getSerialNumber().length() > 100 ){
+        if (drone.getSerialNumber().length() > 100) {
             throw Utils.handleException(ERROR_INVALID_SERIAL_NUMBER);
         }
-        if(drone.getWeightLimit() < 0){
+        if (drone.getWeightLimit() < 0) {
             throw Utils.handleException(ERROR_NEGATIVE_WEIGHT_LIMIT);
         }
         if (drone.getWeightLimit() > MAXIMUM_WEIGHT_LIMIT) {
@@ -62,7 +64,7 @@ public class DroneServiceImpl implements DroneService {
         }
         //check whether the serial number is available
         Optional<Drone> opt = droneRepository.findBySerialNumber(drone.getSerialNumber());
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             throw Utils.handleException(ERROR_SERIAL_NUMBER_ALREADY_EXISTS);
         }
 
@@ -82,14 +84,14 @@ public class DroneServiceImpl implements DroneService {
     public Drone getDrone(String droneSerialNumber) throws DroneManagementClientException {
 
         Optional<Drone> opt = droneRepository.findBySerialNumber(droneSerialNumber);
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             return opt.get();
         }
         throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
     }
 
     @Override
-    public List<Drone> getDronesList(){
+    public List<Drone> getDronesList() {
 
         List<Drone> dronesList = new ArrayList<>();
         droneRepository.findAll().iterator().forEachRemaining(dronesList::add);
@@ -100,9 +102,24 @@ public class DroneServiceImpl implements DroneService {
     public List<Drone> getAvailableDronesForLoading() throws DroneManagementClientException {
 
         Optional<List<Drone>> availableDrones = droneRepository.getAvailableDronesForLoading();
-        if(availableDrones.isPresent()){
+        if (availableDrones.isPresent()) {
             return availableDrones.get();
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public DroneBatteryCapacityDto getBatteryCapacityOfADrone(String serialNumber)
+            throws DroneManagementClientException {
+
+        Optional<Drone> opt = droneRepository.findBySerialNumber(serialNumber);
+        DroneBatteryCapacityDto batteryCapacityDto = new DroneBatteryCapacityDto();
+        if (opt.isPresent()) {
+            Drone drone = opt.get();
+            batteryCapacityDto.setSerialNumber(serialNumber);
+            batteryCapacityDto.setBatteryCapacity(drone.getBatteryCapacity());
+            return batteryCapacityDto;
+        }
+        throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
     }
 }

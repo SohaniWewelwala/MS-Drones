@@ -73,8 +73,10 @@ public class DispatchController {
         }
     }
 
-    @PostMapping(path = "/add-medication", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> addMedication(@RequestPart("file") MultipartFile file, @RequestPart("medication") String medication) throws IOException{
+    @PostMapping(path = "/add-medication", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
+            MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Object> addMedication(@RequestPart("file") MultipartFile file,
+                                                @RequestPart("medication") String medication) throws IOException {
 
         try {
             if (file == null) {
@@ -84,9 +86,19 @@ public class DispatchController {
             Byte[] img = ArrayUtils.toObject(file.getBytes());
             //ObjectMapper to change json to java object.
             ObjectMapper objectMapper = new ObjectMapper();
-            MedicationDto medicationDto  = objectMapper.readValue(medication, MedicationDto.class);
+            MedicationDto medicationDto = objectMapper.readValue(medication, MedicationDto.class);
             //calling addMedicationMethod
-            return  ResponseEntity.ok(medicationService.addMedication(medicationDto, img));
+            return ResponseEntity.ok(medicationService.addMedication(medicationDto, img));
+        } catch (DroneManagementClientException e) {
+            return Utils.handleClientErrorResponse(e);
+        }
+    }
+
+    @GetMapping(path = "/battery-capacity/{serialNumber}")
+    public ResponseEntity<Object> getBatteryCapacityOfADrone(@PathVariable String serialNumber) {
+
+        try {
+            return ResponseEntity.ok(droneService.getBatteryCapacityOfADrone(serialNumber));
         } catch (DroneManagementClientException e) {
             return Utils.handleClientErrorResponse(e);
         }

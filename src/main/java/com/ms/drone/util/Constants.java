@@ -1,14 +1,12 @@
 package com.ms.drone.util;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Required;
 
 public class Constants {
 
     public static final int MAXIMUM_WEIGHT_LIMIT = 500;
+    public static final int MINIMUM_BATTERY_CAPACITY = 25;
     public static final String REGEX = "^[A-Za-z0-9_-]*$";
 
     /**
@@ -55,7 +53,8 @@ public class Constants {
         ERROR_INVALID_MEDICATION_CODE("DM-009", "Invalid medication code.", "Medication code can only have alphabets, numbers, - and _."),
         ERROR_DRONE_NOT_AVAILABLE_FOR_LOADING("DM-010","Invalid drone state.", "Drone not available for LOADING."),
         ERROR_DRONE_WEIGHT_LIMIT_EXCEEDED("DM-011", "Cannot have more weight.", "Drone maximum weight has been exceeded."),
-        ERROR_INVALID_IMAGE_FILE("DM-012", "Invalid image file.", "Should have a valid image file.");
+        ERROR_INVALID_IMAGE_FILE("DM-012", "Invalid image file.", "Should have a valid image file."),
+        ERROR_BATTERY_LEVEL_LOW("DM-013", "Battery level is low.", "Battery level must be greater than 25 to LOAD medications.");
 
         private final String code;
         private final String message;
