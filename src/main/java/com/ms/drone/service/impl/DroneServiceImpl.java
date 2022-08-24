@@ -4,6 +4,7 @@ import com.ms.drone.dto.DroneBatteryCapacityDto;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.model.Drone;
+import com.ms.drone.model.Medication;
 import com.ms.drone.repository.DroneRepository;
 import com.ms.drone.service.DroneService;
 import com.ms.drone.util.Constants;
@@ -119,6 +120,18 @@ public class DroneServiceImpl implements DroneService {
             batteryCapacityDto.setSerialNumber(serialNumber);
             batteryCapacityDto.setBatteryCapacity(drone.getBatteryCapacity());
             return batteryCapacityDto;
+        }
+        throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
+    }
+
+    @Override
+    public List<Medication> medicationsOfAGivenDrone(String serialNumber) throws DroneManagementClientException {
+
+        Optional<Drone> opt = droneRepository.findBySerialNumber(serialNumber);
+        if (opt.isPresent()) {
+            Drone drone = opt.get();
+            List<Medication> medicationList = drone.getMedicationList();
+            return medicationList;
         }
         throw Utils.handleException(ERROR_SERIAL_NUMBER_NOT_EXISTS);
     }

@@ -103,4 +103,14 @@ public class DispatchController {
             return Utils.handleClientErrorResponse(e);
         }
     }
+
+    @GetMapping("/get-medications/{serialNumber}")
+    public ResponseEntity<Object> getMedicationsOfAGivenDrone(@PathVariable String serialNumber) {
+
+        try {
+            return ResponseEntity.ok(droneService.medicationsOfAGivenDrone(serialNumber));
+        } catch (DroneManagementClientException e) {
+            return Utils.handleClientErrorResponse(e);
+        }
+    }
 }

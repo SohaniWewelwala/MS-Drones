@@ -4,6 +4,7 @@ import com.ms.drone.dto.DroneBatteryCapacityDto;
 import com.ms.drone.dto.DroneRegistrationDto;
 import com.ms.drone.exception.DroneManagementClientException;
 import com.ms.drone.model.Drone;
+import com.ms.drone.model.Medication;
 
 import java.util.List;
 
@@ -50,4 +51,13 @@ public interface DroneService {
      * @throws DroneManagementClientException Throws an exception if an error occurs while getting battery capacity of a drone.
      */
     DroneBatteryCapacityDto getBatteryCapacityOfADrone(String serialNumber) throws DroneManagementClientException;
+
+    /**
+     * List of medications of a given drone.
+     *
+     * @param serialNumber Serial number of a drone.
+     * @return List of medications.
+     * @throws DroneManagementClientException Throws an exception if an error occurs while getting medication list.
+     */
+    List<Medication> medicationsOfAGivenDrone(String serialNumber) throws DroneManagementClientException;
 }
