@@ -5,6 +5,7 @@
 - Required data has been preloaded to the project.
 - Run the project using `./mvnw spring-boot:run` in the project root.
 - To build the JAR file run `mvn clean install` (or skip tests using `mvn clean install -DskipTests`) in the project root.
+- Unit tests for some use cases have been implemented.
 
 ## Assumptions
 - When adding medications, they are added to a drone.
